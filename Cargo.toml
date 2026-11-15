@@ -1,0 +1,34 @@
+[package]
+name = "cdsl-rs"
+version = "0.1.0"
+edition = "2021"
+authors = ["kalexion"]
+description = "CDSL — Custom Description Scripting Language interpreter"
+
+[dependencies]
+# Interactive terminal line editor and command history
+rustyline = "19.0.0"
+# Lightweight, read-only XML parsing
+roxmltree = "0.21.2"
+# Raw POSIX bindings for serial communication (termios, poll, open)
+libc = "0.2.191"
+# Date and time formatting for execution logs
+chrono = "0.4.45"
+# Cross-platform resolution of standard user and config directories
+dirs = "7.0.0"
+
+# Main executable binary
+[[bin]]
+name = "cdsl-rs"
+path = "src/main.rs"
+
+# Library crate exposing core language components
+[lib]
+name = "cdsl"
+path = "src/lib.rs"
+
+# Release profile optimizations for binary size and performance
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
