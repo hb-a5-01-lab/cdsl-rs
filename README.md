@@ -6,15 +6,15 @@ The CDSL interpreter is written in **Rust** and provides an interactive terminal
 
 ## Features
 
-* Terminal-based
-* Variables and variable references
-* Arithmetic expressions
-* Configurable hardware components
-* Component value-range validation
-* Robotic movement instructions
-* Command history
-* Input validation and error reporting
-* Serial Communication
+- Terminal-based
+- Variables and variable references
+- Arithmetic expressions
+- Configurable hardware components
+- Component value-range validation
+- Robotic movement instructions
+- Command history
+- Input validation and error reporting
+- Serial Communication
 
 ## Build
 
@@ -22,24 +22,43 @@ The CDSL interpreter is written in **Rust** and provides an interactive terminal
 
 Make sure the following tools are installed:
 
-* Rust / Cargo (1.80+)
-* Git
-* Make
+- Rust / Cargo (1.80+)
+- Git
+- Make
 
-| Command          | Description                                                           |
-| ---------------- | --------------------------------------------------------------------- |
-| `make`           | Build CDSL.                                                           |
-| `make check`     | Check that the required dependencies are installed.                   |
-| `make clean`     | Remove the built `cdsl` binary.                                       |
-| `make rebuild`   | Clean and build the project from scratch.                             |
-| `make install`   | Install the `cdsl` binary to `~/.local/bin`.                          |
-| `make uninstall` | Remove the installed `cdsl` binary.                                   |
-| `make config`    | Create the default configuration file if it does not already exist.   |
+### Makefile Commands
 
+| Command          | Description                                                         |
+| :--------------- | :------------------------------------------------------------------ |
+| `make`           | Build the release binary and set up the default configuration.      |
+| `make help`      | Display the available Makefile commands.                            |
+| `make check`     | Verify that the required development tools are installed.           |
+| `make build`     | Build the CDSL release binary using Cargo.                          |
+| `make run`       | Build and run CDSL.                                                 |
+| `make config`    | Create the default configuration file if it does not already exist. |
+| `make format`    | Format all Rust source files using `cargo fmt`.                     |
+| `make fmt-check` | Check Rust formatting without modifying source files.               |
+| `make test`      | Run all unit and integration tests.                                 |
+| `make clean`     | Remove Cargo build artifacts.                                       |
+| `make rebuild`   | Clean and rebuild the project from scratch.                         |
+| `make install`   | Install the `cdsl-rs` binary to `~/.local/bin`.                     |
+| `make uninstall` | Remove the installed `cdsl-rs` binary from `~/.local/bin`.          |
+
+### Installation
+
+Build and install CDSL:
+
+```bash
+make
+make install
+```
+
+Ensure `~/.local/bin` is included in your system's `PATH` to run CDSL from anywhere.
 
 ## Usage
 
 Run:
+
 ```sh
 cdsl
 ```
@@ -51,7 +70,7 @@ CDSL Interactive Mode
 Type `exit` to quit.
 Type `clear` to clear screen.
 
-cdsl>  
+cdsl>
 ```
 
 Instructions can then be entered directly:
@@ -75,11 +94,11 @@ CDSL programs are composed of instructions, with each instruction written on a s
 
 The current instruction set consists of:
 
-* `set` - Create or update a variable
-* `print` - Print a value or variable
-* `move` - Move a component to a specified value
-* `wait` - Pause execution for a specified duration
-* `printc` - Print the loaded configuration
+- `set` - Create or update a variable
+- `print` - Print a value or variable
+- `move` - Move a component to a specified value
+- `wait` - Pause execution for a specified duration
+- `printc` - Print the loaded configuration
 
 Instruction names are **case-sensitive** and should be written in lowercase.
 
@@ -118,8 +137,8 @@ Variables store floating-point values.
 
 Variable names must:
 
-* Start with a letter or `_`
-* Contain only letters, digits, and `_`
+- Start with a letter or `_`
+- Contain only letters, digits, and `_`
 
 Valid:
 
@@ -414,11 +433,11 @@ The communication protocol uses a fixed-size packet:
 
 The packet contains:
 
-* **Start** — Packet start marker (`0xAA`)
-* **Packet ID** — Identifier for the packet
-* **Component** — Numeric component ID
-* **Float Value** — Value associated with the component
-* **CRC** — CRC-16 checksum
+- **Start** — Packet start marker (`0xAA`)
+- **Packet ID** — Identifier for the packet
+- **Component** — Numeric component ID
+- **Float Value** — Value associated with the component
+- **CRC** — CRC-16 checksum
 
 Supported baud rates include:
 
@@ -431,7 +450,6 @@ Supported baud rates include:
 ```
 
 > Rates can be added or removed by altering the code.
-
 
 The serial communication layer is implemented in Rust and is responsible for constructing and transmitting packets.
 
@@ -500,12 +518,12 @@ move BASE $UNKNOWN
 
 These demonstrate errors such as:
 
-* Missing arguments
-* Invalid variable names
-* Invalid numeric values
-* Negative wait durations
-* Undefined variables
-* Invalid expressions
-* Values outside configured component limits
+- Missing arguments
+- Invalid variable names
+- Invalid numeric values
+- Negative wait durations
+- Undefined variables
+- Invalid expressions
+- Values outside configured component limits
 
 Values supplied to `move` are checked against the configured limits of the specified component.
