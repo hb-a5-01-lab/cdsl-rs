@@ -1,5 +1,5 @@
 # Binaries
-/cdsl
+/cdsl-rs
 *.exe
 *.out
 *.app
